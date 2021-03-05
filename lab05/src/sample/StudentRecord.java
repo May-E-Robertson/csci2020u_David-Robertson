@@ -1,68 +1,50 @@
 package sample;
 
 public class StudentRecord {
-    private int student_id;
-    private int midterm;
-    private int assig;
-    int final_exam;
-    int final_mark;
-    char letter_grade;
+    public String studentID;
+    public float midtermMark;
+    public float assignmentMark;
+    public float finalExamMark;
+    public float finalMark;
+    public char letterGrade;
 
-    public StudentRecord(int student_id, int midterm, int assig, int final_exam, int final_mark, char letter_grade){
-        setID(student_id);
-        setMid(midterm);
-        setAssg(assig);
-        setFinalEx(final_exam);
-        setFinalMark(final_mark);
-        setLetter(letter_grade);
-    }
+    public StudentRecord(String sid, float midterm, float assignment, float exam){
+        this.studentID = sid;
+        this.midtermMark = midterm;
+        this.assignmentMark = assignment;
+        this.finalExamMark = exam;
 
-    //STUDENT ID
-    public int getId() {
-        return student_id;
-    }
-    public void setID(int s_id){
-        this.student_id = (s_id);
-    }
+        this.finalMark = (this.assignmentMark * 0.2f + this.midtermMark * 0.3f  + this.finalExamMark * 0.5f);
 
-    //MIDTERM
-    public int getMid() {
-        return midterm;
-    }
-    public void setMid(int mid){
-        this.midterm = mid;
+        if(finalMark <= 49){
+            this.letterGrade = 'F';
+        } else if(finalMark >= 50 && finalMark <= 59){
+            this.letterGrade = 'D';
+        } else if(finalMark >= 60 && finalMark <= 69) {
+            this.letterGrade = 'C';
+        } else if(finalMark >= 70 && finalMark <= 79) {
+            this.letterGrade = 'B';
+        } else if(finalMark >= 80) {
+            this.letterGrade = 'A';
+        }
     }
 
-    //ASSIGNMENT
-    public int getAssg() {
-        return assig;
+    public String getStudentID() {
+        return this.studentID;
     }
-    public void setAssg(int assignment){
-        this.assig = assignment;
+    public float getMidtermMark() {
+        return this.midtermMark;
     }
-
-    //FINAL EXAM
-    public int getFinalEx() {
-        return final_exam;
+    public float getAssignmentMark() {
+        return this.assignmentMark;
     }
-    public void setFinalEx(int final_ex){
-        this.final_exam = final_ex;
+    public float getFinalExamMark() {
+        return this.finalExamMark;
     }
-
-    //FINAL MARK
-    public int getFinalMark() {
-        return final_mark;
+    public float getFinalMark() {
+        return this.finalMark;
     }
-    public void setFinalMark(int final_m){
-        this.final_mark = final_m;
+    public char getLetterGrade() {
+        return this.letterGrade;
     }
-
-    //LETTER GRADE
-    public char getLetter() {
-        return letter_grade;
-    }
-    public void setLetter(char letter){
-        this.letter_grade = letter;
-    }
-
 }

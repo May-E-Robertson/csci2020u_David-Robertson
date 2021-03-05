@@ -1,30 +1,34 @@
 package sample;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-
-
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Controller {
-    @FXML private TextField Username;
-    @FXML private TextField FullName;
-    @FXML private TextField Email;
-    @FXML private TextField PhoneNum;
-    @FXML private DatePicker DateofBirth;
 
-    public void regButtonClick(ActionEvent e){
-        String uname = Username.getText();
-        String fullname = FullName.getText();
-        String email = Email.getText();
-        String phonenum = PhoneNum.getText();
-        String date = DateofBirth.toString();
+    @FXML private TableView tableView;
 
-        System.out.println("Username: "+uname);
-        System.out.println("Full Name: "+fullname);
-        System.out.println("E-mail: "+email);
-        System.out.println("Phone Number: "+phonenum);
-        System.out.println("Date of Birth: "+DateofBirth.getValue());
+    @FXML private TableColumn<Object, Object> studentID;
+    @FXML private TableColumn<Object, Object> assignmentMark;
+    @FXML private TableColumn<Object, Object> midtermMark;
+    @FXML private TableColumn<Object, Object> finalExamMark;
+    @FXML private TableColumn<Object, Object> finalMark;
+    @FXML private TableColumn<Object, Object> letterGrade;
+
+    private TableView<StudentRecord> marks;
+
+    @FXML
+    public void initialize(){
+
+        studentID.setCellValueFactory(new PropertyValueFactory<>("studentID"));
+        assignmentMark.setCellValueFactory(new PropertyValueFactory<>("assignmentMark"));
+        midtermMark.setCellValueFactory(new PropertyValueFactory<>("midtermMark"));
+        finalExamMark.setCellValueFactory(new PropertyValueFactory<>("finalExamMark"));
+        finalMark.setCellValueFactory(new PropertyValueFactory<>("finalMark"));
+        letterGrade.setCellValueFactory(new PropertyValueFactory<>("letterGrade"));
+
+        tableView.setItems(DataSource.getAllMarks());
     }
 }
