@@ -3,8 +3,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 public class DataSource {
-    public static ObservableList<StudentRecord> getAllMarks()
-    {
+    public static ObservableList<StudentRecord> getAllMarks() {
         ObservableList<StudentRecord> marks = FXCollections.observableArrayList();
         // Student ID, Assignments, Midterm, Final exam
 
