@@ -31,17 +31,17 @@ public class Controller {
     };
 
     private static String[] legendName = {
-
            "TORNADO",
            "SEVERE THUNDERSTORM",
            "FLASH FLOOD",
            "SPECIAL MARINE"
-
     };
 
     @FXML
     public void initialize() {
         gc = mainCanvas.getGraphicsContext2D();
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(1);
 
         filepath = "../lab07/src/sample/weatherwarnings-2015.csv";
 
@@ -55,9 +55,12 @@ public class Controller {
     }
 
     public void drawChart(int x, int y, Map<String, Integer> freq, Color[] colors){
-
+        double total = 0;
+        for(Map.Entry<String,Integer> entry : freq.entrySet()){
+           total += entry.getValue();
+        }
         //calculate sum of array
-        double total = freq.get("tornado")+freq.get("thunder")+freq.get("flood")+freq.get("marine")*1.0000;
+       // double total = freq.get("TORNADO")+freq.get("SEVERE THUNDERSTORM")+freq.get("FLASH FLOOD")+freq.get("SPECIAL MARINE")*1.0000;
 
         int[] arr = new int[3];
 
@@ -65,9 +68,6 @@ public class Controller {
         double angleStart = 0;
 
         gc.setFill(pieColours[i]);
-
-        double val = freq.get("tornado")*1.000;
-        double math = val/total;
 
         for(Map.Entry<String,Integer> entry : freq.entrySet()){
 
@@ -83,6 +83,7 @@ public class Controller {
 
             gc.setFill(pieColours[i]);
             gc.fillArc(x, y, 450, 450,  angleStart,entry.getValue()/total*360, ArcType.ROUND);
+            gc.strokeArc(x, y, 450, 450,  angleStart,entry.getValue()/total*360, ArcType.ROUND);
 
             angleStart+=entry.getValue()/total * 360;
             i++;
@@ -103,12 +104,14 @@ public class Controller {
         for(int i = 0; i<4; i++){
             gc.setFill(pieColours[i]);
             gc.fillRect(50, y+=100, 100, 50);
+            gc.strokeRect(50, y, 100, 50);
         }
 
         y = 225;
-        for(int i = 0; i<4; i++){
+        for(Map.Entry<String,Integer> entry : freq.entrySet()){
             gc.setFill(Color.BLACK);
-            gc.fillText(legendName[i],175, y+=100);
+            gc.fillText(entry.getKey(),175, y+=100);
         }
+
     }
 }
