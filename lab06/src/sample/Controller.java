@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class Controller {
     @FXML private Canvas mainCanvas;
@@ -21,7 +22,7 @@ public class Controller {
     private static String[] ageGroups = {
             "18-25", "26-35", "36-45", "46-55", "56-65", "65+"
     };
-    private static int[] purchasesByAgeGroup = {
+    private static double[] purchasesByAgeGroup = {
             648, 1021, 2453, 3173, 1868, 2247
     };
     private static Color[] pieColours = {
@@ -32,20 +33,24 @@ public class Controller {
     @FXML
     public void initialize() {
         gc = mainCanvas.getGraphicsContext2D();
-        drawGraph(200, 200, avgHousingPricesByYear, Color.RED, 0);
-        drawGraph(200, 200, avgCommercialPricesByYear, Color.BLUE, 25);
+        drawGraph(200, 800, avgHousingPricesByYear, Color.RED, 0);
+        drawGraph(200, 800, avgCommercialPricesByYear, Color.BLUE, 25);
+
+        drawCircle(450, 300, ageGroups, purchasesByAgeGroup, pieColours);
     }
 
 
     public void drawGraph(int width, int height, double[] data, Color color, int xPosition) {
-        double maxVal = Double.NEGATIVE_INFINITY, minVal = Double.MAX_VALUE;
+        double maxVal = Double.NEGATIVE_INFINITY;
+        double minVal = Double.MAX_VALUE;
 
-        for (double val : data) {
+        for (double val : avgCommercialPricesByYear) {
             if (val > maxVal)
                 maxVal = val;
             if (val < minVal)
                 minVal = val;
         }
+        minVal = 0;
 
         double barWidth = width / data.length;
         gc.setFill(color);
@@ -56,6 +61,32 @@ public class Controller {
             //2 times to add space between bars
             xPosition += 2 * barWidth;
         }
+    }
+
+    public void drawCircle(int cWidth, int cHeight, String[] ageGroups, double[] pByAgeGroup, Color[] colors){
+            //x,y same for every circle, location
+            //w, width
+            //h, height
+            //startAngle start
+            //arcExtent end
+            //arr[i]/total * 360
+            int total = 0;
+
+            //calculate sum of array
+            for(int i = 0; i<pByAgeGroup.length; i++){
+                total += pByAgeGroup[i];
+            }
+
+            double angleStart = 0;
+            for(int i = 0; i<pByAgeGroup.length; i++){
+
+                gc.setFill(pieColours[i]);
+
+                gc.fillArc(cWidth, cHeight, 350, 350,  angleStart,pByAgeGroup[i]/total*360, ArcType.ROUND);
+
+                angleStart+=pByAgeGroup[i]/total * 360;
+            }
+        }
 
     }
-}
+
