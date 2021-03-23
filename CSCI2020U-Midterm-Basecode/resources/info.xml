@@ -1,0 +1,28 @@
+<info>
+    <student>
+    <id>100751769</id>
+    <name>David Robertson</name>
+    <email>david.robertson7@ontariotechu.net</email>
+    <software-description>
+        <![CDATA[This software has two different functions as outlined below. Please select the desired function from the main menu
+
+
+        Animation:
+        This function animates a duck based on the sprite sheet provided from the assignment.
+        It animates at one frame every four seconds, including taking four seconds to initially appear.
+        The tan duck was chosen based off my student number as outlined in the assignment pdf.
+
+        2D Graphics:
+        This function prints my initials, D.R., using javafx shapes. The shapes used are rectangles, arc strokes, and arcs.
+        There is a label at the top of the screen that reads "D.R." for reference, in case you can't read my shapes.
+
+
+        Every screen has a button labelled "Back to Main" that allows you to return to the main menu.
+
+
+        Please enjoy the program :^)]]>
+    </software-description>
+    </student>
+
+
+</info>
