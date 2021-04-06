@@ -9,12 +9,12 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Lab04 Solution");
-        primaryStage.setScene(new Scene(root, 800, 475));
+        primaryStage.setTitle("Server");
+        primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+        Server app = new Server();
     }
 
 
